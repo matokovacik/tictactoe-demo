@@ -12,9 +12,20 @@ public class TicTacToeGame {
     static final List<List<Integer>> WINNING_POSITIONS;
     static {
         WINNING_POSITIONS = new ArrayList<List<Integer>>();
+        
+        //Horizontal winning positions
         WINNING_POSITIONS.add(Arrays.asList(1,4,7));
         WINNING_POSITIONS.add(Arrays.asList(2,5,8));
         WINNING_POSITIONS.add(Arrays.asList(3,6,9));
+        
+        //Vertical winning positions
+        WINNING_POSITIONS.add(Arrays.asList(1,2,3));
+        WINNING_POSITIONS.add(Arrays.asList(4,5,6));
+        WINNING_POSITIONS.add(Arrays.asList(7,8,9));
+        
+        //Diagonal winning positions
+        WINNING_POSITIONS.add(Arrays.asList(1,5,9));
+        WINNING_POSITIONS.add(Arrays.asList(3,5,7));
     }
 
     public String getSymbolOnPosition(int pos) {
@@ -39,12 +50,27 @@ public class TicTacToeGame {
         movesYList.add(pos);
     }
 
-    public boolean isPlayerXWon() {
+    
+    public boolean validateWinningMoves(List<Integer> moves) {
         for(List<Integer> winningPosition : WINNING_POSITIONS) {
-            if(movesXList.containsAll(winningPosition))
+            if(moves.containsAll(winningPosition))
                 return true;
         }
         
         return false;
+    }
+
+    public boolean isPlayerXWon() {
+        return validateWinningMoves(movesXList);
+    }
+
+    public boolean isPlayerYWon() {
+        return validateWinningMoves(movesYList);
+    }
+
+    public boolean isDraw() {
+        return movesXList.size() + movesYList.size() == 9
+            && !isPlayerXWon()
+            && !isPlayerYWon();
     }
 }

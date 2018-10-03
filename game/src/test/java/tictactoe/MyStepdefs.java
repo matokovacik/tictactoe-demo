@@ -40,4 +40,15 @@ public class MyStepdefs {
         if(!game.isPlayerXWon())
             Assert.fail("Player X is not a winner");
     }
+
+    @And("^player o won$")
+    public void playerOWon() throws Throwable {
+        if(!game.isPlayerYWon())
+            Assert.fail("Player Y is not a winner");
+    }
+
+    @And("^game ended with draw$")
+    public void gameEndedWithDraw() throws Throwable {
+        Assert.assertTrue(game.isDraw());
+    }
 }
