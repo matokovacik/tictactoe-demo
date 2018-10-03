@@ -13,8 +13,14 @@ public class TicTacToeTest {
     }
     
     @Test(expected = InvalidMoveException.class)
-    public void validateStep1() {
+    public void validateStepTaken() {
         game.playX(1);
         game.playO(1);
+    }
+    
+    @Test(expected = InvalidMoveException.class) 
+    public void validateStepConsecutive() {
+        game.playX(1);
+        game.playX(2);
     }
 }
