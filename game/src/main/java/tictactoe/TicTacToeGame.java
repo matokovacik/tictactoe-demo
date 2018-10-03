@@ -41,20 +41,22 @@ public class TicTacToeGame {
                 + getSymbolOnPosition(7) + "|"+ getSymbolOnPosition(8) +"|" + getSymbolOnPosition(9);
     }
 
-    public void playX(int pos) {
+    public TicTacToeGame playX(int pos) {
         if(isMoveTaken(pos) || !isXPlayerTurn())
             throw new InvalidMoveException();
         movesXList.add(pos);
+        return this;
+    }
+    
+    public TicTacToeGame playO(int pos) {
+        if(isMoveTaken(pos) || isXPlayerTurn())
+            throw new InvalidMoveException();
+        movesOList.add(pos);
+        return this;
     }
 
     private boolean isXPlayerTurn() {
         return movesOList.size() == movesXList.size();
-    }
-
-    public void playO(int pos) {
-        if(isMoveTaken(pos))
-            throw new InvalidMoveException();
-        movesOList.add(pos);
     }
     
     public boolean validateWinningMoves(List<Integer> moves) {
