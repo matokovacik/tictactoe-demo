@@ -20,7 +20,7 @@ public class MyStepdefs {
         String formattedBoard = game.formatBoard();
 
         if(board == null || !board.equals(formattedBoard)) {
-            Assert.fail("Boards don't match");
+            Assert.fail("Boards don't match.\nExpected:\n"+board+"\n---\nGot:\n"+formattedBoard);
         }
 
     }

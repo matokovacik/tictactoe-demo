@@ -19,5 +19,12 @@ Feature: Tic Tac Toe game
     And player o turned '9'
     And player x turned '7'
     Then player x won
-
+    And game board looks like:
+    """
+    X| | 
+    -+-+-
+    X|O| 
+    -+-+-
+    X| |O
+    """
     

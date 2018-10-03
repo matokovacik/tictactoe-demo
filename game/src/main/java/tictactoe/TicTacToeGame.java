@@ -19,7 +19,7 @@ public class TicTacToeGame {
 
     public String getSymbolOnPosition(int pos) {
         if(movesXList.contains(pos)) return "X";
-        else if(movesYList.contains(pos)) return "Y";
+        else if(movesYList.contains(pos)) return "O";
         else return " ";
     }
 
