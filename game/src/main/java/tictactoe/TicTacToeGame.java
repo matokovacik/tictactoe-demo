@@ -55,6 +55,18 @@ public class TicTacToeGame {
         return this;
     }
     
+    public TicTacToeGame play(int pos) {
+        if(isXPlayerTurn()) {
+            playX(pos);
+        } else if (isOPlayerTurn()) {
+            playO(pos);
+        } else {
+            throw new InvalidMoveException();
+        }
+        
+        return this;
+    }
+    
     public boolean isOPlayerTurn() {
         return movesOList.size() != movesXList.size()
                 && !isGameTerminated();

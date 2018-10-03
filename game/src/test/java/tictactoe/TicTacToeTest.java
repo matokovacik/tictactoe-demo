@@ -60,4 +60,14 @@ public class TicTacToeTest {
         Assert.assertFalse(game.isOPlayerTurn());
         Assert.assertTrue(game.isXPlayerTurn());
     }
+    
+    @Test
+    public void testTurnSwitchingReplayMode() {
+        game.play(1);
+        Assert.assertTrue(game.isOPlayerTurn());
+        
+        game.play(2);
+        Assert.assertTrue(game.isXPlayerTurn());
+        
+    }
 }
