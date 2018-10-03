@@ -1,8 +1,10 @@
 package tictactoe;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import org.junit.Assert;
 
 public class MyStepdefs {
 
@@ -18,8 +20,24 @@ public class MyStepdefs {
         String formattedBoard = game.formatBoard();
 
         if(board == null || !board.equals(formattedBoard)) {
-            throw new Exception("Boards don't match");
+            Assert.fail("Boards don't match");
         }
 
+    }
+
+    @And("^player x turned '(\\d+)'$")
+    public void playerXTurned(int pos) throws Throwable {
+        game.playX(pos);
+    }
+
+    @And("^player o turned '(\\d+)'$")
+    public void playerOTurned(int pos) throws Throwable {
+        game.playO(pos);
+    }
+
+    @Then("^player x won$")
+    public void playerXWonWithAVerticalLine() throws Throwable {
+        if(!game.isPlayerXWon())
+            Assert.fail("Player X is not a winner");
     }
 }
