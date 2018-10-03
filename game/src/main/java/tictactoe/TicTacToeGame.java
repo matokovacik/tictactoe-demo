@@ -77,7 +77,7 @@ public class TicTacToeGame {
                 && !isGameTerminated();
     }
 
-    private boolean isGameTerminated() {
+    public boolean isGameTerminated() {
         return isPlayerYWon() || isPlayerXWon() || isDraw();
     }
 
