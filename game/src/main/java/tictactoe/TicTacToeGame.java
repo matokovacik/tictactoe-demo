@@ -42,23 +42,33 @@ public class TicTacToeGame {
     }
 
     public TicTacToeGame playX(int pos) {
-        if(isMoveTaken(pos) || !isXPlayerTurn() || isPlayerYWon() || isPlayerXWon() || isDraw())
+        if(isMoveTaken(pos) || !isXPlayerTurn() )
             throw new InvalidMoveException();
         movesXList.add(pos);
         return this;
     }
     
     public TicTacToeGame playO(int pos) {
-        if(isMoveTaken(pos) || isXPlayerTurn() || isPlayerYWon() || isPlayerXWon() || isDraw())
+        if(isMoveTaken(pos) || !isOPlayerTurn())
             throw new InvalidMoveException();
         movesOList.add(pos);
         return this;
     }
-
-    private boolean isXPlayerTurn() {
-        return movesOList.size() == movesXList.size();
-    }
     
+    public boolean isOPlayerTurn() {
+        return movesOList.size() != movesXList.size()
+                && !isGameTerminated();
+    }
+
+    public boolean isXPlayerTurn() {
+        return movesOList.size() == movesXList.size()
+                && !isGameTerminated();
+    }
+
+    private boolean isGameTerminated() {
+        return isPlayerYWon() || isPlayerXWon() || isDraw();
+    }
+
     public boolean validateWinningMoves(List<Integer> moves) {
         for(List<Integer> winningPosition : WINNING_POSITIONS) {
             if(moves.containsAll(winningPosition))
@@ -68,7 +78,7 @@ public class TicTacToeGame {
         return false;
     }
 
-    private boolean isMoveTaken(int pos) {
+    public boolean isMoveTaken(int pos) {
         return movesXList.contains(pos) || movesOList.contains(pos);
     }
 
