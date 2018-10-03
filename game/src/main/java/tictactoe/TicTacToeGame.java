@@ -42,14 +42,14 @@ public class TicTacToeGame {
     }
 
     public TicTacToeGame playX(int pos) {
-        if(isMoveTaken(pos) || !isXPlayerTurn())
+        if(isMoveTaken(pos) || !isXPlayerTurn() || isPlayerYWon() || isPlayerXWon() || isDraw())
             throw new InvalidMoveException();
         movesXList.add(pos);
         return this;
     }
     
     public TicTacToeGame playO(int pos) {
-        if(isMoveTaken(pos) || isXPlayerTurn())
+        if(isMoveTaken(pos) || isXPlayerTurn() || isPlayerYWon() || isPlayerXWon() || isDraw())
             throw new InvalidMoveException();
         movesOList.add(pos);
         return this;

@@ -31,9 +31,16 @@ public class TicTacToeTest {
     }
     
     @Test(expected = InvalidMoveException.class)
-    public void validateMoveAfterGameFinished() {
+    public void validateMoveAfterGameFinished1() {
         game.playX(1).playO(5).playX(4).playO(9).playX(7);
         
         game.playO(2);
+    }
+
+    @Test(expected = InvalidMoveException.class)
+    public void validateMoveAfterGameFinished2() {
+        game.playX(1).playO(4).playX(3).playO(5).playX(7).playO(6);
+
+        game.playX(2);
     }
 }
