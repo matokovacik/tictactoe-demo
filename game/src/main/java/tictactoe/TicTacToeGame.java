@@ -1,15 +1,12 @@
 package tictactoe;
 
-import org.omg.CORBA.DynAnyPackage.Invalid;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class TicTacToeGame {
     List<Integer> movesXList = new ArrayList<Integer>();
-    List<Integer> movesYList = new ArrayList<Integer>();
+    List<Integer> movesOList = new ArrayList<Integer>();
     
     static final List<List<Integer>> WINNING_POSITIONS;
     static {
@@ -31,8 +28,8 @@ public class TicTacToeGame {
     }
 
     public String getSymbolOnPosition(int pos) {
-        if(movesXList.contains(pos)) return "X";
-        else if(movesYList.contains(pos)) return "O";
+        if( movesXList.contains(pos) ) return "X";
+        else if( movesOList.contains(pos) ) return "O";
         else return " ";
     }
 
@@ -45,19 +42,20 @@ public class TicTacToeGame {
     }
 
     public void playX(int pos) {
-        if(isMoveTaken(pos))
+        if(isMoveTaken(pos) || !isXPlayerTurn())
             throw new InvalidMoveException();
         movesXList.add(pos);
     }
 
-
+    private boolean isXPlayerTurn() {
+        return movesOList.size() == movesXList.size();
+    }
 
     public void playO(int pos) {
         if(isMoveTaken(pos))
             throw new InvalidMoveException();
-        movesYList.add(pos);
+        movesOList.add(pos);
     }
-
     
     public boolean validateWinningMoves(List<Integer> moves) {
         for(List<Integer> winningPosition : WINNING_POSITIONS) {
@@ -69,7 +67,7 @@ public class TicTacToeGame {
     }
 
     private boolean isMoveTaken(int pos) {
-        return movesXList.contains(pos) || movesYList.contains(pos);
+        return movesXList.contains(pos) || movesOList.contains(pos);
     }
 
     public boolean isPlayerXWon() {
@@ -77,11 +75,11 @@ public class TicTacToeGame {
     }
 
     public boolean isPlayerYWon() {
-        return validateWinningMoves(movesYList);
+        return validateWinningMoves(movesOList);
     }
 
     public boolean isDraw() {
-        return movesXList.size() + movesYList.size() == 9
+        return movesXList.size() + movesOList.size() == 9
             && !isPlayerXWon()
             && !isPlayerYWon();
     }
