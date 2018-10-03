@@ -6,17 +6,20 @@ import cucumber.api.java.en.Then;
 
 public class MyStepdefs {
 
+    private TicTacToeGame game;
 
     @Given("^game started$")
     public void gameStarted() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        game = new TicTacToeGame();
     }
-
 
     @Then("^game board looks like:$")
     public void gameBoardLooksLike(String board) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        String formattedBoard = game.formatBoard();
+
+        if(board == null || !board.equals(formattedBoard)) {
+            throw new Exception("Boards don't match");
+        }
+
     }
 }

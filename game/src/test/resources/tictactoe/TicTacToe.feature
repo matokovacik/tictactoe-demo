@@ -4,12 +4,9 @@ Feature: Tic Tac Toe game
     Given game started
     Then game board looks like:
     """
-    Game Board Creation...
-     | |
+     | | 
     -+-+-
-     | |
+     | | 
     -+-+-
-     | |
-    Board Created.
-    The game will start with player X
+     | | 
     """
