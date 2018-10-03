@@ -1,5 +1,7 @@
 package tictactoe;
 
+import org.omg.CORBA.DynAnyPackage.Invalid;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -43,10 +45,16 @@ public class TicTacToeGame {
     }
 
     public void playX(int pos) {
+        if(isMoveTaken(pos))
+            throw new InvalidMoveException();
         movesXList.add(pos);
     }
-    
+
+
+
     public void playO(int pos) {
+        if(isMoveTaken(pos))
+            throw new InvalidMoveException();
         movesYList.add(pos);
     }
 
@@ -58,6 +66,10 @@ public class TicTacToeGame {
         }
         
         return false;
+    }
+
+    private boolean isMoveTaken(int pos) {
+        return movesXList.contains(pos) || movesYList.contains(pos);
     }
 
     public boolean isPlayerXWon() {
